@@ -1,73 +1,76 @@
-# Kali Linux Installation Guide 🚀
+# Kali Linux Installation Documentation
 
-This document details the step-by-step installation choices, hypervisor resource allocation, and key lessons learned while deploying the Kali Linux offensive workstation.
+This document records the installation steps, configuration choices, system updates, and initial driver setup for the Kali Linux virtual machine.
 
 ---
 
-## 📌 Installation Summary & Environment
+## Technical Specifications
 
-| Property | Value |
+| Parameter | Configuration |
 | :--- | :--- |
-| **Operating System** | Kali Linux (2024.x / 2026.x 64-bit) |
-| **Download Source** | Official Kali Linux Website (`kali-linux-installer-amd64.iso`) |
+| **Operating System** | Kali Linux 2026.2 (64-bit) |
+| **Media Source** | `kali-linux-2026.2-installer-amd64.iso` |
 | **Hypervisor** | VMware Workstation Pro 17.6.3 |
-| **Host System** | Windows 11 (25H2) |
-| **Allocated Memory** | 3 - 4 GB RAM |
-| **Allocated Processors**| 1 Processor, 2 Cores |
-| **Storage Provisioning**| 40 - 80 GB Thin Provisioned Virtual Disk |
-| **Network Adapter** | NAT (`VMnet8`) |
+| **Host System** | Windows 11 25H2 |
+| **Allocated Memory** | 3 GB (3072 MB) |
+| **Allocated Processors**| 1 CPU (2 vCPU Cores) |
+| **Storage Provisioning**| 80 GB Thin Provisioned Virtual Disk |
+| **Network Mode** | NAT (`VMnet8`) |
 | **Desktop Environment**| XFCE |
 
 ---
 
-## 🛠️ Step-by-Step Installation Choices
+## Installation Process
 
-### 1. VM Creation in VMware Workstation
-1. Open **VMware Workstation Pro** and click **Create a New Virtual Machine**.
-2. Select **Typical (recommended)** configuration.
-3. Choose **Installer disc image file (iso)** and browse to the downloaded `kali-linux-installer-amd64.iso`.
-4. Select Guest Operating System: **Linux** -> **Debian 11/12 64-bit**.
-5. Set Virtual Machine Name to `KALI-ATTACK` and choose storage directory.
-6. Allocate **3 GB RAM**, **2 vCPUs**, and **80 GB Disk** (store virtual disk as a single file).
+### 1. Virtual Machine Creation
+1. Opened VMware Workstation Pro 17.6.3 and selected **Create a New Virtual Machine**.
+2. Selected **Typical (recommended)** setup.
+3. Specified the installer ISO file path (`kali-linux-2026.2-installer-amd64.iso`).
+4. Set the guest operating system type to **Linux** and version to **Debian 11/12 64-bit**.
+5. Named the virtual machine `KALI-ATTACK`.
+6. Allocated 80 GB virtual disk capacity stored as a single file.
+7. Customized hardware parameters to allocate 3 GB RAM and 2 vCPU cores.
 
-### 2. Operating System Setup Wizard
-1. Boot the VM and select **Graphical Install** from the boot menu.
-2. Select Language (**English**), Location, and Keyboard Layout (**American English**).
-3. Set Hostname: `kali-attack`. Leave domain name blank.
-4. Configure user account:
-   * **Full name:** `Kali User`
-   * **Username:** `kali`
-   * Set secure password.
-5. Disk Partitioning: Select **Guided - use entire disk** (Ext4 filesystem withSwap).
-6. Software Selection:
-   * Keep default **XFCE** desktop environment.
-   * Keep default top 10 tools & standard security utilities.
-7. Install GRUB Boot Loader: Select `/dev/sda` for master boot record installation.
-8. Complete installation and reboot into Kali Linux.
+### 2. Operating System Installation
+1. Booted the VM and selected **Graphical Install** from the GRUB boot menu.
+2. Selected language (**English**), territory (**United States**), and keymap (**American English**).
+3. Set the system hostname to `kali-attack` and left the domain name blank.
+4. Created a non-root administrative user account (`kali`).
+5. Configured disk partitioning using **Guided - use entire disk** with the default single-partition scheme (Ext4 filesystem and Swap space).
+6. Confirmed partition changes and wrote modifications to disk.
+7. Accepted default software selection choices: **XFCE Desktop Environment**, **top 10 tools**, and **default toolset**.
+8. Installed the GRUB boot loader to the primary virtual disk drive (`/dev/sda`).
+9. Finished installation and rebooted the system into the installed OS.
 
-### 3. Post-Installation Configuration
-Log in with created credentials and execute initial updates and guest utilities:
+### 3. Post-Installation Commands & Guest Driver Setup
+Logged into the system and executed system updates and driver installation commands in the terminal:
+
 ```bash
-# 1. Update package lists and system tools
+# 1. Update package repository indexes and upgrade existing packages
 sudo apt update && sudo apt upgrade -y
 
-# 2. Install open-vm-tools-desktop for display resolution & clipboard sharing
+# 2. Install open-vm-tools-desktop for dynamic display resizing and clipboard sharing
 sudo apt install -y open-vm-tools-desktop
 
-# 3. Restart system to activate guest drivers
+# 3. Reboot the system to initialize updated drivers and kernel modules
 sudo reboot
+```
+
+System installation and configuration were verified post-reboot using standard system utility commands:
+
+```bash
+whoami
+hostnamectl
+uname -a
+ip a
 ```
 
 ---
 
-## 💡 Lessons Learned & Problems Encountered
+## Snapshot Creation
 
-### ❌ The Problem: Invisible Mouse Cursor in Pre-built VM Appliance
-Initially, an attempt was made to import the pre-built Kali Linux VMware appliance (`.ova` / `.vmx`). However, upon booting into the XFCE desktop, the mouse cursor was completely invisible and failed to render inside the VM frame. Attempting to reinstall VMware Tools or adjust display acceleration settings did not resolve the cursor rendering bug.
+After verifying successful installation, network access, and display driver integration, a baseline snapshot was created in VMware Workstation:
 
-### ✅ The Solution: Manual Installation via Installer ISO
-Switching to the official **Installer ISO Image (`.iso`)** and performing a clean manual installation resolved the graphics and input rendering issues completely. Manual installation also provided deeper understanding of Linux partition structures and guest driver integration.
-
-### 🎯 Key Takeaway for Security Engineering
-* **Pre-packaged appliances** offer quick deployment, but driver conflicts with host GPUs or hypervisor versions can introduce unneeded bugs.
-* **Manual ISO installations** provide total control over disk partitioning, system packages, and input drivers—ensuring environment stability.
+* **Snapshot Name**: `Baseline Clean Setup`
+* **State**: System powered off.
+* **Purpose**: Provides a known clean restoration point for guest system recovery.

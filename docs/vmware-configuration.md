@@ -1,38 +1,38 @@
-# VMware Workstation Configuration ⚙️
+# VMware Workstation Configuration Documentation
 
-This document details the hypervisor configuration, virtual network settings, resource allocation, and snapshot strategy used in VMware Workstation Pro.
+This document explains the hypervisor settings, virtual hardware resource allocation, network parameters, display settings, and snapshot strategy configured in VMware Workstation Pro 17.6.3.
 
 ---
 
-## 💻 Resource Allocation
+## Resource Allocation & Rationale
 
-| Hardware Component | Configuration | Rationale |
+| Component | Configuration | Technical Rationale |
 | :--- | :--- | :--- |
-| **RAM / Memory** | 3072 MB (3 GB) | Optimal balance for host performance and smooth XFCE desktop execution |
-| **Processors** | 1 CPU, 2 vCPU Cores | Enables efficient multi-threading for tool execution (Nmap, Burp Suite) |
-| **Storage Disk** | 80 GB Thin Provisioned | Sufficient space for toolsets, logs, and capture files without consuming host storage immediately |
-| **Network Adapter** | NAT (`VMnet8`) | Provides guest internet access while maintaining isolated subnet routing |
-| **Display Acceleration**| 3D Graphics Disabled | Prevents graphics driver stuttering and cursor rendering bugs |
+| **Hypervisor** | VMware Workstation Pro 17.6.3 | Provides reliable hardware virtualization, virtual network isolation controls, and snapshot management. |
+| **Memory (RAM)** | 3 GB (3072 MB) | Allocates sufficient memory for the XFCE desktop and CLI tools while leaving resource headroom for the Windows host OS. |
+| **Processors** | 1 CPU (2 Cores) | Provides 2 virtual CPU cores for parallel execution of system tasks and multi-threaded terminal tools. |
+| **Disk Storage** | 80 GB (Thin Provisioned) | Reserves virtual storage capacity for package updates and capture files without immediately allocating 80 GB of host physical storage. |
+| **Network Adapter** | NAT (`VMnet8`) | Routes guest traffic through host IP translation, providing outbound network access while isolating the guest from the external physical LAN. |
+| **Display Settings** | 3D Acceleration Disabled | Disabling 3D acceleration prevents GPU driver rendering conflicts and display glitches within the virtualized XFCE environment. |
 
 ---
 
-## 🌐 Network Configuration (NAT)
+## Network Configuration Details
 
-1. Open **VMware Workstation Pro**.
-2. Go to **Edit** > **Virtual Network Editor** and click **Change Settings**.
-3. Select `VMnet8` (NAT):
-   * **Subnet IP:** Assigned dynamically via hypervisor NAT engine (e.g. `192.168.x.0`).
-   * **Subnet Mask:** `255.255.255.0`
-   * **DHCP:** Enabled for automatic guest network configuration.
+* **Adapter Type**: NAT (`VMnet8`)
+* **Subnet Addressing**: Managed dynamically by VMware virtual DHCP/NAT engine.
+* **Gateway & DNS**: Resolved through VMware host network adapter interface.
+* **Security Control**: Prevents external inbound traffic from directly reaching the guest operating system interface.
 
 ---
 
-## 📸 VM Snapshot Strategy
+## Snapshot Strategy
 
-Creating clean baseline snapshots allows restoring the VM to a pristine state whenever software breaks or testing offensive tools.
+VMware snapshots capture the complete virtual disk state and memory state of a virtual machine at a specific point in time.
 
-### Taking a Baseline Snapshot
-1. Power off or pause the Kali Linux Virtual Machine.
-2. Navigate to **VM** > **Snapshot** > **Take Snapshot...**.
-3. **Name**: `Baseline Clean Setup - Kali Linux Installed`.
-4. **Description**: *Clean installation from ISO with open-vm-tools-desktop, updated packages, and NAT networking verified.*
+### Configuration
+* **Baseline Snapshot**: `Baseline Clean Setup`
+* **Condition**: Created immediately after guest OS installation, package updates, and `open-vm-tools-desktop` verification.
+
+### Purpose
+Taking a clean baseline snapshot ensures that if guest configuration files become corrupted or packages fail during operational practice, the virtual machine can be reverted to a working state within seconds without requiring a full OS re-installation.
