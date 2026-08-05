@@ -40,3 +40,7 @@ VMware snapshots capture the virtual disk state and memory state of a virtual ma
 * **Name**: `Baseline Clean Setup`
 * **Condition**: Created immediately after guest OS installation, system updates, and `open-vm-tools-desktop` driver verification.
 * **Purpose**: Allows restoring the virtual machine to a known working state within seconds if system files or software packages become corrupted during testing.
+
+![VMware Snapshot Manager](../screenshots/Kali%20-%20Snapshot%20Manager.png)
+*Figure 3: VMware Workstation Snapshot Manager showing the clean baseline snapshot.*
+

@@ -60,6 +60,7 @@ cybersecurity-home-lab/
 └── screenshots/
     ├── vmware-settings.png
     ├── kali-desktop.png
+    ├── Kali - Snapshot Manager.png
     ├── Chossing_Virtual_machines_instead_of_installer_images.png
     └── Download_recommended.png
 ```
@@ -81,10 +82,13 @@ cybersecurity-home-lab/
 
 ![Download Recommendation](screenshots/Download_recommended.png)
 
-### VMware Configuration & Guest Desktop
+### VMware Configuration, Baseline Snapshot & Guest Desktop
 ![VMware Configuration Settings](screenshots/vmware-settings.png)
 
+![VMware Snapshot Manager](screenshots/Kali%20-%20Snapshot%20Manager.png)
+
 ![Kali Linux Desktop Environment](screenshots/kali-desktop.png)
+
 
 ---
 
