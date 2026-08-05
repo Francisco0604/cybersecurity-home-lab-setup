@@ -83,6 +83,6 @@ ip a
 
 After verifying successful installation, network access, and display driver integration, a baseline snapshot was created in VMware Workstation:
 
-* **Snapshot Name**: `Baseline Clean Setup`
+* **Snapshot Name**: `Fresh Kali`
 * **State**: System powered off.
 * **Purpose**: Provides a known clean restoration point for guest system recovery.
