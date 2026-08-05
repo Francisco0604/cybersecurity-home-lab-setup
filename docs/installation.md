@@ -1,12 +1,12 @@
-# Kali Linux Installation Documentation
+# Kali Linux Installation Documentation 🚀
 
-This document records the installation steps, configuration choices, system updates, and initial driver setup for the Kali Linux virtual machine.
+This document details the step-by-step installation process, configuration choices, system updates, and guest driver setup for the Kali Linux virtual machine.
 
 ---
 
-## Technical Specifications
+## 📌 Technical Specifications
 
-| Parameter | Configuration |
+| Parameter | Configuration Specification |
 | :--- | :--- |
 | **Operating System** | Kali Linux 2026.2 (64-bit) |
 | **Media Source** | `kali-linux-2026.2-installer-amd64.iso` |
@@ -20,43 +20,62 @@ This document records the installation steps, configuration choices, system upda
 
 ---
 
-## Installation Process
+## 🛠️ Step-by-Step Installation & Visual Verification
 
-### 1. Virtual Machine Creation
-1. Opened VMware Workstation Pro 17.6.3 and selected **Create a New Virtual Machine**.
-2. Selected **Typical (recommended)** setup.
-3. Specified the installer ISO file path (`kali-linux-2026.2-installer-amd64.iso`).
-4. Set the guest operating system type to **Linux** and version to **Debian 11/12 64-bit**.
-5. Named the virtual machine `KALI-ATTACK`.
-6. Allocated 80 GB virtual disk capacity stored as a single file.
-7. Customized hardware parameters to allocate 3 GB RAM and 2 vCPU cores.
+### 1. Media Selection & VM Hardware Allocation
+* **Installer Media**: Selected official Kali Linux Installer ISO (`kali-linux-installer-amd64.iso`) over pre-packaged VM appliances to ensure native display driver detection and full disk partitioning control.
+* **Resource Allocation**: Configured 3 GB RAM, 2 vCPU cores, and 80 GB virtual storage disk.
 
-### 2. Operating System Installation
-1. Booted the VM and selected **Graphical Install** from the GRUB boot menu.
-2. Selected language (**English**), territory (**United States**), and keymap (**American English**).
-3. Set the system hostname to `kali-attack` and left the domain name blank.
-4. Created a non-root administrative user account (`kali`).
-5. Configured disk partitioning using **Guided - use entire disk** with the default single-partition scheme (Ext4 filesystem and Swap space).
-6. Confirmed partition changes and wrote modifications to disk.
-7. Accepted default software selection choices: **XFCE Desktop Environment**, **top 10 tools**, and **default toolset**.
-8. Installed the GRUB boot loader to the primary virtual disk drive (`/dev/sda`).
-9. Finished installation and rebooted the system into the installed OS.
+![Media Download Selection](../screenshots/Download_recommended.png)
+*Figure 1: Official Kali Linux Installer ISO media download.*
 
-### 3. Post-Installation Commands & Guest Driver Setup
-Logged into the system and executed system updates and driver installation commands in the terminal:
+![VM Hardware Customization](../screenshots/installer_hardware_allocation_4.png)
+*Figure 2: Customizing virtual hardware settings (3 GB RAM, 2 Cores, 80 GB storage).*
+
+---
+
+### 2. Disk Partitioning & Operating System Installation
+1. Booted virtual machine and launched **Graphical Install** from the GRUB boot menu.
+2. Configured localization: Language (**English**), Country (**United States**), and Keymap (**American English**).
+3. Set system hostname to `kali-attack` and created non-root administrative account (`kali`).
+4. **Disk Partitioning**: Selected **Guided - use entire disk** with Ext4 primary partition and Swap space.
+5. Confirmed partition changes and wrote file system changes to disk.
+
+![Disk Partitioning Scheme](../screenshots/installer_partition_disk_9.png)
+*Figure 3: Guided disk partitioning selection.*
+
+![Writing Partition Changes](../screenshots/installer_partition_disk_13.png)
+*Figure 4: Writing partition layout and Ext4 file system modifications to disk.*
+
+---
+
+### 3. Software Selection & GRUB Bootloader Configuration
+1. Accepted software selection choices: **XFCE Desktop Environment**, **top 10 tools**, and **default toolset**.
+2. Installed GRUB bootloader to the primary virtual hard drive (`/dev/sda`).
+
+![Software Selection](../screenshots/installer_software_selection_14.png)
+*Figure 5: Software selection setup (XFCE desktop & default toolset).*
+
+![GRUB Bootloader Installation](../screenshots/installer_grub_boot_loader_15.png)
+*Figure 6: Installing GRUB bootloader to primary disk /dev/sda.*
+
+---
+
+### 4. Post-Installation Commands & Driver Verification
+Logged into Kali Linux and executed system package updates and guest integration tools:
 
 ```bash
-# 1. Update package repository indexes and upgrade existing packages
+# 1. Update package repository indexes and upgrade packages
 sudo apt update && sudo apt upgrade -y
 
-# 2. Install open-vm-tools-desktop for dynamic display resizing and clipboard sharing
+# 2. Install open-vm-tools-desktop for dynamic resolution and clipboard sharing
 sudo apt install -y open-vm-tools-desktop
 
-# 3. Reboot the system to initialize updated drivers and kernel modules
+# 3. Reboot system to initialize updated display drivers
 sudo reboot
 ```
 
-System installation and configuration were verified post-reboot using standard system utility commands:
+Verified environment details post-reboot:
 
 ```bash
 whoami
@@ -65,12 +84,15 @@ uname -a
 ip a
 ```
 
+![Kali Desktop Environment](../screenshots/kali-desktop.png)
+*Figure 7: Kali Linux XFCE desktop environment and terminal verification.*
+
 ---
 
-## Snapshot Creation
+## 📸 Snapshot Creation
 
-After verifying successful installation, network access, and display driver integration, a baseline snapshot was created in VMware Workstation:
+After verifying system updates and display driver integration, a baseline snapshot was created in VMware Workstation:
 
 * **Snapshot Name**: `Baseline Clean Setup`
 * **State**: System powered off.
-* **Purpose**: Provides a known clean restoration point for guest system recovery.
+* **Purpose**: Establishes a known clean restoration baseline for system recovery.
