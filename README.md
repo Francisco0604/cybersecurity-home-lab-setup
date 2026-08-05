@@ -93,7 +93,7 @@ cybersecurity-home-lab/
 ## Author
 
 **Francisco Elroy Afonso**  
-Junior Penetration Tester | Practical Ethical Hacker (PEH) | Google Cybersecurity Professional
+Aspiring Penetration Tester | Practical Ethical Hacker (PEH) | Google Cybersecurity Professional
 
 ---
 
