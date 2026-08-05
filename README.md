@@ -7,50 +7,44 @@ Designed & Documented by **Francisco Elroy Afonso**
 
 ## 📌 Overview
 
-This repository documents the setup of my personal cybersecurity lab environment.
+This repository documents the deployment and configuration of my personal cybersecurity lab environment.
 
-The lab is used to practice Linux administration, network scanning, penetration testing techniques, web application security, and offensive security methodologies in a safe, isolated virtual environment.
-
-I will continue expanding this repository as I build additional target machines, labs, and security projects.
+The lab provides a safe, isolated virtual workspace for practicing Linux administration, network security, penetration testing methodologies, and defensive security analysis.
 
 ---
 
-## 🎯 Objectives & Why I Built This
+## 🎯 Objectives & Achieved Goals
 
-The goal of this lab is to establish a reliable local platform for practical hands-on learning:
-
-* **Linux Administration & CLI**: System navigation, bash scripting, network commands, and package management.
-* **Offensive Tooling**: Hands-on usage of Nmap, Burp Suite, Wireshark, Git, and security utilities.
-* **Web Application Security**: Preparing for OWASP Top 10 vulnerabilities testing (Burp Suite, Juice Shop, DVWA).
-* **Network Security & Isolation**: Configuring hypervisor networking, NAT, and host isolation.
-* **Technical Problem Solving**: Documenting real setup challenges, root cause analyses, and verified fixes.
+- **Linux Administration & CLI**: Installed and configured Kali Linux, mastering terminal commands, system navigation, package management, and system updates.
+- **Hypervisor Management**: Configured VMware Workstation Pro 17.6.3, virtual hardware resource allocation, and NAT networking.
+- **System Hardening & Driver Integration**: Configured `open-vm-tools-desktop` for display auto-fitting, input integration, and performance optimization.
+- **Snapshot Management**: Implemented a clean baseline VM snapshot strategy for instant recovery.
+- **Engineering Problem Solving**: Diagnosed and resolved guest input bugs (invisible mouse cursor rendering issue) through manual ISO installation and hardware compatibility management.
 
 ---
 
-## 💻 Current Environment
+## 💻 Environment Specifications
 
-| Component | Specification |
+| Component | Configuration |
 | :--- | :--- |
 | **Host System** | Windows 11 (25H2) |
 | **Hypervisor** | VMware Workstation Pro 17.6.3 |
-| **Guest OS** | Kali Linux 2024.x / 2026.x |
-| **Desktop Environment** | XFCE Desktop |
-| **VM Hardware Specs** | 3 - 4 GB RAM \| 2 vCPUs \| 40 - 80 GB Storage |
-| **Network Type** | NAT / Isolated Subnet |
+| **Guest VM** | Kali Linux (XFCE Desktop) |
+| **Memory (RAM)** | 3 GB (3072 MB) |
+| **Processors** | 1 CPU, 2 vCPU Cores |
+| **Storage Disk** | 80 GB Thin Provisioned Virtual Disk |
+| **Network Type** | NAT (`VMnet8`) |
+| **Display Settings** | 3D Acceleration Disabled |
 
 ---
 
-## 📊 Current Progress
+## ✅ Completed Setup Milestones
 
-- [x] **Hypervisor Setup**: VMware Workstation installed & configured
-- [x] **Kali Linux Deployment**: Manually installed Kali Linux from official Installer ISO
-- [x] **Guest Integration & Utilities**: Configured `open-vm-tools-desktop` & display drivers
-- [x] **Network Connectivity**: Verified NAT networking & IP assignment
-- [x] **Clean Snapshot**: Created clean baseline VM snapshot in VMware
-- [ ] **Burp Suite Setup & Intercept Configuration**
-- [ ] **OWASP Juice Shop Target Deployment**
-- [ ] **DVWA Target Deployment**
-- [ ] **Active Directory Lab Build (Windows Server & Domain Controller)**
+- [x] **Hypervisor Installation & Networking**: VMware Workstation Pro configured with NAT network isolation.
+- [x] **Kali Linux Deployment**: Completed manual OS installation using official Kali Linux Installer ISO.
+- [x] **Guest Driver Integration**: Installed and verified `open-vm-tools-desktop`.
+- [x] **Baseline Snapshot**: Created clean baseline restore point in VMware.
+- [x] **Troubleshooting & Fix Verification**: Diagnosed and resolved guest cursor rendering issue.
 
 ---
 
@@ -58,24 +52,22 @@ The goal of this lab is to establish a reliable local platform for practical han
 
 ```text
 cybersecurity-home-lab/
-├── README.md                           # Main repository overview & lab progress
+├── README.md                           # Main repository overview & lab configuration
 ├── screenshots/                        # Visual setup verification & evidence
-│   ├── vmware-settings.png            # VMware Workstation network & VM settings
-│   ├── kali-desktop.png               # Kali Linux XFCE desktop & terminal
-│   ├── Chossing_Virtual_machines_instead_of_installer_images.png # VM vs Installer comparison
-│   └── Download_recommended.png       # Appliance vs ISO image download options
-└── docs/                               # Detailed lab documentation
-    ├── installation.md                 # Kali Linux ISO installation steps & lessons learned
-    ├── vmware-configuration.md         # Hardware allocation, NAT network & snapshot settings
-    ├── troubleshooting.md             # Real-world problem resolution (Invisible mouse cursor fix)
-    └── roadmap.md                      # Future project build plan & learning roadmap
+│   ├── vmware-settings.png            # VMware Workstation settings & NAT configuration
+│   ├── kali-desktop.png               # Kali Linux XFCE desktop & terminal verification
+│   ├── Chossing_Virtual_machines_instead_of_installer_images.png # Appliance vs ISO comparison
+│   └── Download_recommended.png       # Official download options
+└── docs/                               # Detailed lab deployment documentation
+    ├── installation.md                 # Kali Linux ISO installation steps & key findings
+    ├── vmware-configuration.md         # Resource allocation, NAT network & snapshot settings
+    └── troubleshooting.md             # Real-world problem resolution (Invisible mouse cursor fix)
 ```
 
-### 📚 Documentation Links:
-* 📘 [**Installation Guide (`docs/installation.md`)**](docs/installation.md): Step-by-step setup of Kali Linux via Installer ISO and key lessons learned.
-* ⚙️ [**VMware Configuration Guide (`docs/vmware-configuration.md`)**](docs/vmware-configuration.md): Hypervisor resource allocation, NAT networking, and snapshot strategy.
+### 📚 Documentation Guides:
+* 📘 [**Installation Guide (`docs/installation.md`)**](docs/installation.md): Detailed step-by-step setup of Kali Linux via Installer ISO and installation choices.
+* ⚙️ [**VMware Configuration Guide (`docs/vmware-configuration.md`)**](docs/vmware-configuration.md): Resource allocation, NAT networking, and baseline snapshot procedures.
 * 🛠️ [**Troubleshooting Guide (`docs/troubleshooting.md`)**](docs/troubleshooting.md): Detailed root cause analysis and resolution for the invisible mouse cursor bug.
-* 🗺️ [**Lab Roadmap (`docs/roadmap.md`)**](docs/roadmap.md): Multi-week roadmap for upcoming web targets and Active Directory labs.
 
 ---
 
