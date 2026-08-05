@@ -1,68 +1,38 @@
-# VMware Workstation Hypervisor Configuration ⚙️
+# VMware Workstation Configuration ⚙️
 
-While virtualization engines such as Oracle VM VirtualBox can also be utilized, **VMware Workstation Pro / Player** is used throughout this write-up for hypervisor management, custom virtual networking, and snapshot trees.
+This document details the hypervisor configuration, virtual network settings, resource allocation, and snapshot strategy used in VMware Workstation Pro.
 
 ---
 
-## 1. Virtual Network Editor Setup (VMnet)
+## 💻 Resource Allocation
 
-1. Open **VMware Workstation as Administrator**.
-2. Go to **Edit** > **Virtual Network Editor**.
-3. Click **Change Settings** to elevate permissions.
-4. Add or edit a custom VMnet adapter (e.g., `VMnet8` or `VMnet2`):
-   * **Network Type:** NAT or Host-Only (Isolated from external LAN).
-   * **Subnet IP:** `192.168.10.0`
+| Hardware Component | Configuration | Rationale |
+| :--- | :--- | :--- |
+| **RAM / Memory** | 3072 MB (3 GB) | Optimal balance for host performance and smooth XFCE desktop execution |
+| **Processors** | 1 CPU, 2 vCPU Cores | Enables efficient multi-threading for tool execution (Nmap, Burp Suite) |
+| **Storage Disk** | 80 GB Thin Provisioned | Sufficient space for toolsets, logs, and capture files without consuming host storage immediately |
+| **Network Adapter** | NAT (`VMnet8`) | Provides guest internet access while maintaining isolated subnet routing |
+| **Display Acceleration**| 3D Graphics Disabled | Prevents graphics driver stuttering and cursor rendering bugs |
+
+---
+
+## 🌐 Network Configuration (NAT)
+
+1. Open **VMware Workstation Pro**.
+2. Go to **Edit** > **Virtual Network Editor** and click **Change Settings**.
+3. Select `VMnet8` (NAT):
+   * **Subnet IP:** Assigned dynamically via hypervisor NAT engine (e.g. `192.168.x.0`).
    * **Subnet Mask:** `255.255.255.0`
-5. Ensure DHCP settings are set to lease addresses within `192.168.10.100 - 192.168.10.200` to prevent collisions with static IPs.
-
-![VMware Settings](../screenshots/vmware-settings.png)
+   * **DHCP:** Enabled for automatic guest network configuration.
 
 ---
 
-## 2. VM Creation & Storage Types
+## 📸 VM Snapshot Strategy
 
-When creating Virtual Machines in VMware Workstation:
-* **For ISO Installer Images (.ISO):**
-  1. Select **File > New Virtual Machine > Typical / Custom**.
-  2. Select **Installer disc image file (iso)** and point to the downloaded `.iso` file.
-  3. Ensure **VMware Tools / Open VM Tools** are installed post-OS wizard for optimal resolution, guest isolation, and clipboard sharing.
-* **For Pre-built VM Appliances (.OVA / .VMDK):**
-  1. Extract the downloaded `.7z` / `.zip` archive.
-  2. Double-click the `.vmx` file or select **File > Open** in VMware to import directly.
+Creating clean baseline snapshots allows restoring the VM to a pristine state whenever software breaks or testing offensive tools.
 
----
-
-## 3. Resource Allocation Guidelines
-
-| Machine | Recommended RAM | vCPU Cores | Disk Provisioning |
-| :--- | :--- | :--- | :--- |
-| **Domain Controller** | 4096 MB | 2 Cores | Thin Provision, 60 GB |
-| **Windows 10 Client** | 4096 MB | 2 Cores | Thin Provision, 50 GB |
-| **Kali Linux** | 4096 MB | 2 Cores | Thin Provision, 40 GB |
-| **Ubuntu Target** | 2048 MB | 1 Core | Thin Provision, 30 GB |
-
----
-
-## 4. VM Snapshot Strategy
-
-Always take a **Clean Baseline Snapshot** before running security assessments:
-1. Shut down all lab virtual machines.
-2. Select VM > **VM** > **Snapshot** > **Take Snapshot...**.
-3. Title: `Baseline Clean State - AD & Web Target Configured`.
-4. Restore to this snapshot whenever testing destructive exploits or malware payloads.
-
----
-
-## 5. 💡 Troubleshooting: Missing or Invisible Mouse Cursor
-
-If your mouse cursor disappears or becomes invisible when working inside a virtual machine (common after OS updates or fresh Kali Linux installs):
-
-1. **Upgrade Virtual Machine Hardware Compatibility**:
-   * Fully **Power off** the virtual machine.
-   * Right-click the virtual machine in the VMware Library pane.
-   * Select **Manage** > **Upgrade Hardware Compatibility...** (or click **Upgrade Virtual Machine**).
-   * Follow the wizard to upgrade to the latest supported VMware hardware version.
-   * Power on the virtual machine; the mouse cursor will render properly.
-2. **Re-capture / Release Mouse Input**: Use the `Ctrl + Alt` shortcut to release the cursor from the VM frame if trapped.
-3. **Ensure Guest Utilities are Installed**: Install `open-vm-tools-desktop` on Linux guests.
-
+### Taking a Baseline Snapshot
+1. Power off or pause the Kali Linux Virtual Machine.
+2. Navigate to **VM** > **Snapshot** > **Take Snapshot...**.
+3. **Name**: `Baseline Clean Setup - Kali Linux Installed`.
+4. **Description**: *Clean installation from ISO with open-vm-tools-desktop, updated packages, and NAT networking verified.*

@@ -1,57 +1,56 @@
 # Cybersecurity Home Lab 🛡️
 
-[![Primary Hypervisor](https://img.shields.io/badge/Hypervisor-VMware%20Workstation-blue?style=for-the-badge&logo=vmware)](docs/vmware-configuration.md)
-[![Target Domain](https://img.shields.io/badge/Active%20Directory-CORP.LOCAL-red?style=for-the-badge&logo=windows)](docs/installation.md)
-[![Subnet](https://img.shields.io/badge/Subnet-192.168.10.0%2F24-green?style=for-the-badge)](docs/networking.md)
-[![Troubleshooting](https://img.shields.io/badge/Guide-Troubleshooting-orange?style=for-the-badge)](docs/troubleshooting.md)
-
 Designed & Documented by **Francisco Elroy Afonso**  
 *Junior Penetration Tester | Practical Ethical Hacker (PEH) | Google Cybersecurity Professional*
 
 ---
 
-## 📌 Executive Summary
+## 📌 Overview
 
-This repository documents the setup and configuration of my personal **Cybersecurity Home Lab**. The environment is engineered for hands-on vulnerability assessments, Active Directory domain penetration testing, web application audits, and defensive security analysis—isolated securely from production host networks.
+This repository documents the setup of my personal cybersecurity lab environment.
 
----
+The lab is used to practice Linux administration, network scanning, penetration testing techniques, web application security, and offensive security methodologies in a safe, isolated virtual environment.
 
-## 🎯 Lab Objectives
-
-* **Active Directory Exploitation**: Practice Kerberoasting, AS-REP Roasting, LLMNR/NBT-NS Poisoning (Responder), and privilege escalation in a simulated enterprise domain (`CORP.LOCAL`).
-* **Web Security Auditing**: Perform OWASP Top 10 security testing against vulnerable web applications (OWASP Juice Shop / DVWA) using Burp Suite Professional / Community.
-* **Network Reconnaissance & Scanning**: Master Nmap ping sweeps, service versioning, and NSE scripts across custom subnets.
-* **Engineering & Problem Resolution**: Document root causes, hypervisor network isolation, and troubleshooting procedures for career technical portfolio demonstration.
+I will continue expanding this repository as I build additional target machines, labs, and security projects.
 
 ---
 
-## 🗺️ Lab Network Architecture
+## 🎯 Objectives & Why I Built This
 
-```mermaid
-graph TD
-    subgraph Isolated Lab Subnet [192.168.10.0/24 - VMware VMnet]
-        KALI["⚔️ Kali Linux Attacker<br/>IP: 192.168.10.50"]
-        DC["🏰 Windows Server 2019 DC<br/>Domain: CORP.LOCAL<br/>IP: 192.168.10.10"]
-        WKSTN["💻 Windows 10 Endpoint<br/>Domain Member<br/>IP: 192.168.10.20"]
-        WEB["🧃 OWASP Juice Shop / Docker<br/>Web Target<br/>IP: 192.168.10.30:3000"]
-    end
+The goal of this lab is to establish a reliable local platform for practical hands-on learning:
 
-    KALI -- "Nmap / Recon / Metasploit" --> DC
-    KALI -- "Responder / LLMNR Poisoning" --> WKSTN
-    KALI -- "Burp Suite / OWASP Audits" --> WEB
-    WKSTN -- "Authenticated DNS / Kerberos" --> DC
-```
+* **Linux Administration & CLI**: System navigation, bash scripting, network commands, and package management.
+* **Offensive Tooling**: Hands-on usage of Nmap, Burp Suite, Wireshark, Git, and security utilities.
+* **Web Application Security**: Preparing for OWASP Top 10 vulnerabilities testing (Burp Suite, Juice Shop, DVWA).
+* **Network Security & Isolation**: Configuring hypervisor networking, NAT, and host isolation.
+* **Technical Problem Solving**: Documenting real setup challenges, root cause analyses, and verified fixes.
 
 ---
 
-## 💻 Virtual Machine Specifications
+## 💻 Current Environment
 
-| Hostname | Operating System | Network Role | Static IP | Storage / Memory |
-| :--- | :--- | :--- | :--- | :--- |
-| **DC-01** | Windows Server 2019 / 2022 | AD DS Domain Controller (`CORP.LOCAL`), DNS Server | `192.168.10.10` | 4 GB RAM / 60 GB Disk |
-| **WKSTN-01** | Windows 10 / 11 Enterprise | Domain-Joined Corporate Endpoint | `192.168.10.20` | 4 GB RAM / 50 GB Disk |
-| **KALI-ATTACK** | Kali Linux (2024.x) | Offensive Security & Penetration Testing Workstation | `192.168.10.50` | 4 GB RAM / 40 GB Disk |
-| **WEB-TARGET** | Ubuntu Linux / Docker | OWASP Juice Shop & DVWA Vulnerable Web Targets | `192.168.10.30` | 2 GB RAM / 30 GB Disk |
+| Component | Specification |
+| :--- | :--- |
+| **Host System** | Windows 11 (25H2) |
+| **Hypervisor** | VMware Workstation Pro 17.6.3 |
+| **Guest OS** | Kali Linux 2024.x / 2026.x |
+| **Desktop Environment** | XFCE Desktop |
+| **VM Hardware Specs** | 3 - 4 GB RAM \| 2 vCPUs \| 40 - 80 GB Storage |
+| **Network Type** | NAT / Isolated Subnet |
+
+---
+
+## 📊 Current Progress
+
+- [x] **Hypervisor Setup**: VMware Workstation installed & configured
+- [x] **Kali Linux Deployment**: Manually installed Kali Linux from official Installer ISO
+- [x] **Guest Integration & Utilities**: Configured `open-vm-tools-desktop` & display drivers
+- [x] **Network Connectivity**: Verified NAT networking & IP assignment
+- [x] **Clean Snapshot**: Created clean baseline VM snapshot in VMware
+- [ ] **Burp Suite Setup & Intercept Configuration**
+- [ ] **OWASP Juice Shop Target Deployment**
+- [ ] **DVWA Target Deployment**
+- [ ] **Active Directory Lab Build (Windows Server & Domain Controller)**
 
 ---
 
@@ -59,58 +58,40 @@ graph TD
 
 ```text
 cybersecurity-home-lab/
-├── README.md                           # Main portfolio overview & architecture
-├── screenshots/                        # Environment visual evidence & verification
-│   ├── vmware-settings.png            # Virtual Network Editor configuration
-│   ├── kali-desktop.png               # Kali Linux terminal & scan output
-│   ├── network-config.png             # Domain Controller static IP configuration
-│   ├── Chossing_Virtual_machines_instead_of_installer_images.png # VM vs Installer options
-│   └── Download_recommended.png       # Appliance vs ISO image download selection
-└── docs/                               # Detailed deployment & troubleshooting guides
-    ├── installation.md                 # Deployment steps (Pre-built OVA & ISO Installer)
-    ├── vmware-configuration.md         # Virtual Network Editor & snapshot strategies
-    ├── networking.md                   # IP mapping, DNS routing & host isolation
-    └── troubleshooting.md             # Real-world problem resolution (Cursor bug, DNS fix)
+├── README.md                           # Main repository overview & lab progress
+├── screenshots/                        # Visual setup verification & evidence
+│   ├── vmware-settings.png            # VMware Workstation network & VM settings
+│   ├── kali-desktop.png               # Kali Linux XFCE desktop & terminal
+│   ├── Chossing_Virtual_machines_instead_of_installer_images.png # VM vs Installer comparison
+│   └── Download_recommended.png       # Appliance vs ISO image download options
+└── docs/                               # Detailed lab documentation
+    ├── installation.md                 # Kali Linux ISO installation steps & lessons learned
+    ├── vmware-configuration.md         # Hardware allocation, NAT network & snapshot settings
+    ├── troubleshooting.md             # Real-world problem resolution (Invisible mouse cursor fix)
+    └── roadmap.md                      # Future project build plan & learning roadmap
 ```
 
-### 📚 Detailed Guides:
-* 📘 [**Installation Guide (`docs/installation.md`)**](docs/installation.md): Step-by-step installation instructions using both Pre-built VM Appliances (.OVA) and ISO Installer Images (.ISO).
-* ⚙️ [**VMware Configuration Guide (`docs/vmware-configuration.md`)**](docs/vmware-configuration.md): Virtual Network Editor setup, hardware allocation, and baseline snapshot strategies.
-* 🌐 [**Networking Guide (`docs/networking.md`)**](docs/networking.md): Subnet mapping, DNS routing (`CORP.LOCAL`), and security isolation rules.
-* 🛠️ [**Troubleshooting Guide (`docs/troubleshooting.md`)**](docs/troubleshooting.md): Real-world technical hurdles, root cause analyses, and verified fixes (Invisible Mouse Cursor, DNS Domain Join failures).
+### 📚 Documentation Links:
+* 📘 [**Installation Guide (`docs/installation.md`)**](docs/installation.md): Step-by-step setup of Kali Linux via Installer ISO and key lessons learned.
+* ⚙️ [**VMware Configuration Guide (`docs/vmware-configuration.md`)**](docs/vmware-configuration.md): Hypervisor resource allocation, NAT networking, and snapshot strategy.
+* 🛠️ [**Troubleshooting Guide (`docs/troubleshooting.md`)**](docs/troubleshooting.md): Detailed root cause analysis and resolution for the invisible mouse cursor bug.
+* 🗺️ [**Lab Roadmap (`docs/roadmap.md`)**](docs/roadmap.md): Multi-week roadmap for upcoming web targets and Active Directory labs.
 
 ---
 
 ## 📷 Visual Verification
 
-### Virtual Machine Acquisition Options (Pre-built VM vs ISO Installer)
+### Virtual Machine Acquisition Options
 ![VM vs ISO Installer](screenshots/Chossing_Virtual_machines_instead_of_installer_images.png)
 
-![Download Recommended Appliance](screenshots/Download_recommended.png)
+![Download Options](screenshots/Download_recommended.png)
 
-### VMware Virtual Network Setup
+### VMware Configuration & Kali Desktop
 ![VMware Settings](screenshots/vmware-settings.png)
 
-### Active Directory Domain Controller Network Configuration
-![DC Network Config](screenshots/network-config.png)
-
-### Kali Linux Offensive Workstation Setup
 ![Kali Desktop](screenshots/kali-desktop.png)
-
----
-
-## 🚀 Technical Portfolio Roadmap
-
-This repository represents the foundation of a progressive practical offensive security portfolio:
-
-* 🟢 **`cybersecurity-home-lab`** *(Active)*: Enterprise network setup, AD domain, host isolation, & baseline configurations.
-* 🟡 **`burp-suite-labs`**: Web security academy walkthroughs, proxy intercept configurations, & parameter tampering.
-* 🟡 **`owasp-juice-shop-pentest`**: Full penetration testing report & vulnerability assessment against OWASP Juice Shop.
-* 🟡 **`active-directory-lab`**: Advanced Active Directory attack vectors, Kerberoasting, BloodHound domain mapping, & GPO exploitation.
-* 🟡 **`python-security-tools`**: Custom Python scripts for port scanning, banner grabbing, and credential brute-forcing.
 
 ---
 
 ## 📜 License & Usage
 This repository is built for educational, research, and defensive security testing purposes only.
-
