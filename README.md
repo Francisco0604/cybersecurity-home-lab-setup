@@ -58,11 +58,12 @@ cybersecurity-home-lab/
 │   ├── vmware-configuration.md
 │   └── troubleshooting.md
 └── screenshots/
-    ├── vmware-settings.png
-    ├── kali-desktop.png
-    ├── Kali - Snapshot Manager.png
-    ├── Chossing_Virtual_machines_instead_of_installer_images.png
-    └── Download_recommended.png
+    ├── 01-vmware-library.png
+    ├── 04-kali-desktop.png
+    ├── 05-system-information.png
+    ├── 06-network-information.png
+    ├── 07-vm-snapshot.png
+    └── 08-terminal-overview.png
 ```
 
 ---
@@ -77,18 +78,15 @@ cybersecurity-home-lab/
 
 ## Visual Verification
 
-### Virtual Machine Options (Pre-built Appliance vs. Installer ISO)
-![Installer Image Comparison](screenshots/Chossing_Virtual_machines_instead_of_installer_images.png)
+### Hypervisor Library & Virtual Machine Setup
+![VMware Workstation Library](screenshots/01-vmware-library.png)
 
-![Download Recommendation](screenshots/Download_recommended.png)
+![VMware Snapshot Manager](screenshots/07-vm-snapshot.png)
 
-### VMware Configuration, Baseline Snapshot & Guest Desktop
-![VMware Configuration Settings](screenshots/vmware-settings.png)
+### Guest Desktop & Terminal Verification
+![Kali Linux Desktop Environment](screenshots/04-kali-desktop.png)
 
-![VMware Snapshot Manager](screenshots/Kali%20-%20Snapshot%20Manager.png)
-
-![Kali Linux Desktop Environment](screenshots/kali-desktop.png)
-
+![Terminal Overview](screenshots/08-terminal-overview.png)
 
 ---
 
