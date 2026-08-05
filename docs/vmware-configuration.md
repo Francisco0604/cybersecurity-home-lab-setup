@@ -43,5 +43,5 @@ VMware snapshots capture the complete virtual disk state and memory state of a v
 ### Purpose
 Taking a clean baseline snapshot ensures that if guest configuration files become corrupted or packages fail during operational practice, the virtual machine can be reverted to a working state within seconds without requiring a full OS re-installation.
 
-![VMware Snapshot Manager](screenshots/07-vm-snapshot.png)
+![VMware Snapshot Manager](screenshots/04-vm-snapshot.png)
 *Figure 3: VMware Workstation Snapshot Manager showing baseline clean snapshot.*

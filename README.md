@@ -59,11 +59,11 @@ cybersecurity-home-lab/
 │   └── troubleshooting.md
 └── screenshots/
     ├── 01-vmware-library.png
-    ├── 04-kali-desktop.png
-    ├── 05-system-information.png
-    ├── 06-network-information.png
-    ├── 07-vm-snapshot.png
-    └── 08-terminal-overview.png
+    ├── 02-kali-desktop.png
+    ├── 03-system-information.png
+    ├── 04-vm-snapshot.png
+    ├── 05-terminal-overview.png
+    └── 06-network-information.png
 ```
 
 ---
@@ -81,12 +81,12 @@ cybersecurity-home-lab/
 ### Hypervisor Library & Virtual Machine Setup
 ![VMware Workstation Library](screenshots/01-vmware-library.png)
 
-![VMware Snapshot Manager](screenshots/07-vm-snapshot.png)
+![VMware Snapshot Manager](screenshots/04-vm-snapshot.png)
 
 ### Guest Desktop & Terminal Verification
-![Kali Linux Desktop Environment](screenshots/04-kali-desktop.png)
+![Kali Linux Desktop Environment](screenshots/02-kali-desktop.png)
 
-![Terminal Overview](screenshots/08-terminal-overview.png)
+![Terminal Overview](screenshots/05-terminal-overview.png)
 
 ---
 

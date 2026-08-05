@@ -65,17 +65,17 @@ uname -a
 ip a
 ```
 
-![Kali Linux Desktop](screenshots/04-kali-desktop.png)
+![Kali Linux Desktop](screenshots/02-kali-desktop.png)
 *Figure 1: Kali Linux XFCE desktop environment after installation.*
 
-![System Information](screenshots/05-system-information.png)
+![System Information](screenshots/03-system-information.png)
 *Figure 2: System information verification showing kernel and OS details (`hostnamectl`, `uname -a`).*
 
-![Network Information](screenshots/06-network-information.png)
-*Figure 3: Network interface configuration verification (`ip a`).*
+![Terminal Overview](screenshots/05-terminal-overview.png)
+*Figure 3: Terminal execution and user account verification (`whoami`).*
 
-![Terminal Overview](screenshots/08-terminal-overview.png)
-*Figure 4: Terminal execution and user account verification (`whoami`).*
+![Network Information](screenshots/06-network-information.png)
+*Figure 4: Network interface configuration verification (`ip a`).*
 
 ---
 
